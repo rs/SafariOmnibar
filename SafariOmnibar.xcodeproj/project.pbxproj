@@ -7,19 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53B2999813CA4BD800CDB6FF /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B2999713CA4BD800CDB6FF /* JRSwizzle.m */; };
 		53F7E26C13CA2680007FFA53 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F7E26B13CA2680007FFA53 /* Cocoa.framework */; };
 		53F7E27613CA2680007FFA53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53F7E27413CA2680007FFA53 /* InfoPlist.strings */; };
+		53F7E27F13CA26BC007FFA53 /* SafariOmnibar.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F7E27E13CA26BC007FFA53 /* SafariOmnibar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		53B2999613CA4BD800CDB6FF /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
+		53B2999713CA4BD800CDB6FF /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		53F7E26813CA2680007FFA53 /* SafariOmnibar.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafariOmnibar.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F7E26B13CA2680007FFA53 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		53F7E26E13CA2680007FFA53 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		53F7E26F13CA2680007FFA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		53F7E27013CA2680007FFA53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		53F7E27313CA2680007FFA53 /* SafariOmnibar-Info.plist */ = {isa = PBXFileReference; path = "SafariOmnibar-Info.plist"; sourceTree = "<group>"; };
+		53F7E27313CA2680007FFA53 /* SafariOmnibar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SafariOmnibar-Info.plist"; sourceTree = "<group>"; };
 		53F7E27513CA2680007FFA53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		53F7E27713CA2680007FFA53 /* SafariOmnibar-Prefix.pch */ = {isa = PBXFileReference; path = "SafariOmnibar-Prefix.pch"; sourceTree = "<group>"; };
+		53F7E27713CA2680007FFA53 /* SafariOmnibar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SafariOmnibar-Prefix.pch"; sourceTree = "<group>"; };
+		53F7E27D13CA26BC007FFA53 /* SafariOmnibar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariOmnibar.h; sourceTree = "<group>"; };
+		53F7E27E13CA26BC007FFA53 /* SafariOmnibar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariOmnibar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,25 +58,18 @@
 			isa = PBXGroup;
 			children = (
 				53F7E26B13CA2680007FFA53 /* Cocoa.framework */,
-				53F7E26D13CA2680007FFA53 /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		53F7E26D13CA2680007FFA53 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				53F7E26E13CA2680007FFA53 /* AppKit.framework */,
-				53F7E26F13CA2680007FFA53 /* CoreData.framework */,
-				53F7E27013CA2680007FFA53 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		53F7E27113CA2680007FFA53 /* SafariOmnibar */ = {
 			isa = PBXGroup;
 			children = (
 				53F7E27213CA2680007FFA53 /* Supporting Files */,
+				53F7E27D13CA26BC007FFA53 /* SafariOmnibar.h */,
+				53F7E27E13CA26BC007FFA53 /* SafariOmnibar.m */,
+				53B2999613CA4BD800CDB6FF /* JRSwizzle.h */,
+				53B2999713CA4BD800CDB6FF /* JRSwizzle.m */,
 			);
 			path = SafariOmnibar;
 			sourceTree = "<group>";
@@ -98,6 +94,7 @@
 				53F7E26413CA2680007FFA53 /* Sources */,
 				53F7E26513CA2680007FFA53 /* Frameworks */,
 				53F7E26613CA2680007FFA53 /* Resources */,
+				53F7E28313CA2F46007FFA53 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -144,11 +141,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		53F7E28313CA2F46007FFA53 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# clean up any previous products/symbolic links in the SIMBL Plugins folder\nif [ -a \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\" ]; then\nrm -Rf \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\"\nfi\n\n# Depending on the build configuration, either copy or link to the most recent product\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n# if we're debugging, add a symbolic link to the plug-in\nln -sf \"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\" \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\"\nelif [ \"${CONFIGURATION}\" == \"Release\" ]; then\n# if we're compiling for release, just copy the plugin to the SIMBL Plugins folder\ncp -Rfv \"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\" \"${USER_LIBRARY_DIR}/Application Support/SIMBL/Plugins/${FULL_PRODUCT_NAME}\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		53F7E26413CA2680007FFA53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F7E27F13CA26BC007FFA53 /* SafariOmnibar.m in Sources */,
+				53B2999813CA4BD800CDB6FF /* JRSwizzle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +198,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -203,7 +219,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -256,6 +272,7 @@
 				53F7E27C13CA2680007FFA53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

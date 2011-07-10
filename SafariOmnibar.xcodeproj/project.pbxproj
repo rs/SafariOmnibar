@@ -1,0 +1,263 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		53F7E26C13CA2680007FFA53 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F7E26B13CA2680007FFA53 /* Cocoa.framework */; };
+		53F7E27613CA2680007FFA53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53F7E27413CA2680007FFA53 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		53F7E26813CA2680007FFA53 /* SafariOmnibar.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafariOmnibar.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		53F7E26B13CA2680007FFA53 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		53F7E26E13CA2680007FFA53 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		53F7E26F13CA2680007FFA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		53F7E27013CA2680007FFA53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		53F7E27313CA2680007FFA53 /* SafariOmnibar-Info.plist */ = {isa = PBXFileReference; path = "SafariOmnibar-Info.plist"; sourceTree = "<group>"; };
+		53F7E27513CA2680007FFA53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		53F7E27713CA2680007FFA53 /* SafariOmnibar-Prefix.pch */ = {isa = PBXFileReference; path = "SafariOmnibar-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		53F7E26513CA2680007FFA53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53F7E26C13CA2680007FFA53 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		53F7E25D13CA2680007FFA53 = {
+			isa = PBXGroup;
+			children = (
+				53F7E27113CA2680007FFA53 /* SafariOmnibar */,
+				53F7E26A13CA2680007FFA53 /* Frameworks */,
+				53F7E26913CA2680007FFA53 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		53F7E26913CA2680007FFA53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				53F7E26813CA2680007FFA53 /* SafariOmnibar.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		53F7E26A13CA2680007FFA53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53F7E26B13CA2680007FFA53 /* Cocoa.framework */,
+				53F7E26D13CA2680007FFA53 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		53F7E26D13CA2680007FFA53 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53F7E26E13CA2680007FFA53 /* AppKit.framework */,
+				53F7E26F13CA2680007FFA53 /* CoreData.framework */,
+				53F7E27013CA2680007FFA53 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		53F7E27113CA2680007FFA53 /* SafariOmnibar */ = {
+			isa = PBXGroup;
+			children = (
+				53F7E27213CA2680007FFA53 /* Supporting Files */,
+			);
+			path = SafariOmnibar;
+			sourceTree = "<group>";
+		};
+		53F7E27213CA2680007FFA53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				53F7E27313CA2680007FFA53 /* SafariOmnibar-Info.plist */,
+				53F7E27413CA2680007FFA53 /* InfoPlist.strings */,
+				53F7E27713CA2680007FFA53 /* SafariOmnibar-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		53F7E26713CA2680007FFA53 /* SafariOmnibar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53F7E27A13CA2680007FFA53 /* Build configuration list for PBXNativeTarget "SafariOmnibar" */;
+			buildPhases = (
+				53F7E26413CA2680007FFA53 /* Sources */,
+				53F7E26513CA2680007FFA53 /* Frameworks */,
+				53F7E26613CA2680007FFA53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SafariOmnibar;
+			productName = SafariOmnibar;
+			productReference = 53F7E26813CA2680007FFA53 /* SafariOmnibar.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		53F7E25F13CA2680007FFA53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Dailymotion;
+			};
+			buildConfigurationList = 53F7E26213CA2680007FFA53 /* Build configuration list for PBXProject "SafariOmnibar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 53F7E25D13CA2680007FFA53;
+			productRefGroup = 53F7E26913CA2680007FFA53 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				53F7E26713CA2680007FFA53 /* SafariOmnibar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		53F7E26613CA2680007FFA53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53F7E27613CA2680007FFA53 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		53F7E26413CA2680007FFA53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		53F7E27413CA2680007FFA53 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				53F7E27513CA2680007FFA53 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		53F7E27813CA2680007FFA53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		53F7E27913CA2680007FFA53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		53F7E27B13CA2680007FFA53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SafariOmnibar/SafariOmnibar-Prefix.pch";
+				INFOPLIST_FILE = "SafariOmnibar/SafariOmnibar-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		53F7E27C13CA2680007FFA53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SafariOmnibar/SafariOmnibar-Prefix.pch";
+				INFOPLIST_FILE = "SafariOmnibar/SafariOmnibar-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		53F7E26213CA2680007FFA53 /* Build configuration list for PBXProject "SafariOmnibar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53F7E27813CA2680007FFA53 /* Debug */,
+				53F7E27913CA2680007FFA53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53F7E27A13CA2680007FFA53 /* Build configuration list for PBXNativeTarget "SafariOmnibar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53F7E27B13CA2680007FFA53 /* Debug */,
+				53F7E27C13CA2680007FFA53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 53F7E25F13CA2680007FFA53 /* Project object */;
+}

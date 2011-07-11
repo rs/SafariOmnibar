@@ -14,6 +14,11 @@ Installation
 
 Download our [installer](https://github.com/downloads/rs/SafariOmnibar/Safari%20Omnibar.pkg) and run it then restart Safari.
 
+Uninstall
+=========
+
+Remove the file `/Library/Application\ Support/SIMBL/Plugins/SafariOmnibar.bundle`
+
 Usage
 =====
 

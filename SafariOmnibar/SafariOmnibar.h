@@ -11,11 +11,14 @@
     @private
     NSArray *searchProviders;
     NSDictionary *defaultSearchProvider;
+    NSMutableDictionary *barProviderMap;
 }
 
 @property (nonatomic, readonly) NSDictionary *defaultSearchProvider;
 
 + (SafariOmnibar *)sharedInstance;
 - (NSDictionary *)searchProviderForKeyword:(NSString *)keyword;
+- (NSDictionary *)searchProviderForLocationField:(NSTextField *)locationField;
+- (void)resetSearchProviderForLocationField:(NSTextField *)locationField;
 
 @end

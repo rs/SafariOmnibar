@@ -3,7 +3,7 @@
 //  SafariOmnibar
 //
 //  Created by Olivier Poitrey on 10/07/11.
-//  Copyright 2011 Dailymotion. All rights reserved.
+//  Copyright 2011 Olivier Poitrey. All rights reserved.
 //
 
 #import "SafariOmnibar.h"

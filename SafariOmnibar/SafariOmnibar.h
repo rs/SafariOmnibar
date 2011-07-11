@@ -7,5 +7,15 @@
 //
 
 @interface SafariOmnibar : NSObject
+{
+    @private
+    NSArray *searchProviders;
+    NSDictionary *defaultSearchProvider;
+}
+
+@property (nonatomic, readonly) NSDictionary *defaultSearchProvider;
+
++ (SafariOmnibar *)sharedInstance;
+- (NSDictionary *)searchProviderForKeyword:(NSString *)keyword;
 
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53B2999813CA4BD800CDB6FF /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B2999713CA4BD800CDB6FF /* JRSwizzle.m */; };
+		53B299A913CB306800CDB6FF /* SearchProviders.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53B299A813CB306800CDB6FF /* SearchProviders.plist */; };
 		53F7E26C13CA2680007FFA53 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F7E26B13CA2680007FFA53 /* Cocoa.framework */; };
 		53F7E27613CA2680007FFA53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53F7E27413CA2680007FFA53 /* InfoPlist.strings */; };
 		53F7E27F13CA26BC007FFA53 /* SafariOmnibar.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F7E27E13CA26BC007FFA53 /* SafariOmnibar.m */; };
@@ -16,6 +17,7 @@
 /* Begin PBXFileReference section */
 		53B2999613CA4BD800CDB6FF /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		53B2999713CA4BD800CDB6FF /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		53B299A813CB306800CDB6FF /* SearchProviders.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SearchProviders.plist; sourceTree = "<group>"; };
 		53F7E26813CA2680007FFA53 /* SafariOmnibar.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafariOmnibar.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F7E26B13CA2680007FFA53 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		53F7E27313CA2680007FFA53 /* SafariOmnibar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SafariOmnibar-Info.plist"; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				53F7E27313CA2680007FFA53 /* SafariOmnibar-Info.plist */,
 				53F7E27413CA2680007FFA53 /* InfoPlist.strings */,
 				53F7E27713CA2680007FFA53 /* SafariOmnibar-Prefix.pch */,
+				53B299A813CB306800CDB6FF /* SearchProviders.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53F7E27613CA2680007FFA53 /* InfoPlist.strings in Resources */,
+				53B299A913CB306800CDB6FF /* SearchProviders.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +209,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -225,6 +230,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;

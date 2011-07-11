@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SearchProvidersList</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>Google</string>
+			<key>Keyword</key>
+			<string>g</string>
+			<key>Default</key>
+			<true/>
+			<key>SearchURLTemplate</key>
+			<string>http://www.google.com/search?client=safari&amp;rls=en&amp;q={searchTerms}&amp;ie=UTF-8&amp;oe=UTF-8</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Google Image</string>
+			<key>Keyword</key>
+			<string>image</string>
+			<key>Default</key>
+			<false/>
+			<key>SearchURLTemplate</key>
+			<string>http://images.google.com/images?hl=en&amp;source=hp&amp;q={searchTerms}&amp;btnG=Search+Images&amp;gbv=2&amp;aq=f&amp;oq=&amp;aqi=</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Wikipedia</string>
+			<key>Keyword</key>
+			<string>w</string>
+			<key>Default</key>
+			<false/>
+			<key>SearchURLTemplate</key>
+			<string>http://en.wikipedia.org/w/index.php?title=Special:Search&amp;search={searchTerms}</string>
+		</dict>
+	</array>
+</dict>
+</plist>

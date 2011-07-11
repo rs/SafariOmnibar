@@ -65,7 +65,16 @@
                                                  name:@"NSWindowDidBecomeMainNotification"
                                                object:nil];
 
-    [NSClassFromString(@"BrowserWindowControllerMac") jr_swizzleMethod:@selector(goToToolbarLocation:) withMethod:@selector(SafariOmnibar_goToToolbarLocation:) error:NULL];
+    if (NSClassFromString(@"BrowserWindowControllerMac"))
+    {
+        [NSClassFromString(@"BrowserWindowControllerMac") jr_swizzleMethod:@selector(goToToolbarLocation:)
+                                                                withMethod:@selector(SafariOmnibar_goToToolbarLocation:) error:NULL];
+    }
+    else
+    {
+        [NSClassFromString(@"BrowserWindowController") jr_swizzleMethod:@selector(goToToolbarLocation:)
+                                                             withMethod:@selector(SafariOmnibar_goToToolbarLocation:) error:NULL];
+    }
 }
 
 @end

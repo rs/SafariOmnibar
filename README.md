@@ -6,7 +6,7 @@ Safari Omnibar is a Safari SIMBL plugin aiming at mimicing the Chrome's smart lo
 Requirement
 ===========
 
-- Safari 5.0 (Snow Leopard) - May work with older version of Safari, but this is not tested
+- Safari 5.1 (Lion)
 - [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) 1.9.9 (packaged with the installer)
 
 Installation

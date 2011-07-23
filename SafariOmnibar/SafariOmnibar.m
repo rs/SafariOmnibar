@@ -7,7 +7,10 @@
 //
 
 #import "SafariOmnibar.h"
+#import "SearchProvidersEditorWindowController.h"
 #import "JRSwizzle.h"
+
+NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
 
 @implementation NSObject(SO)
 
@@ -59,8 +62,16 @@
 
 @end
 
+@interface SafariOmnibar ()
+
+@property (nonatomic, retain) NSMenuItem *editSearchProvidersItem;
+
+@end
+
 @implementation SafariOmnibar
+@synthesize searchProviders;
 @synthesize defaultSearchProvider;
+@synthesize editSearchProvidersItem;
 @dynamic pluginVersion;
 
 - (void)onLocationFieldChange:(NSNotification *)notification
@@ -103,6 +114,25 @@
     }
 }
 
+- (void)addContextMenuItemsToLocationField:(id)locationField
+{
+    // To add an item to the location field's context menu, we need to add one
+    // to its field editor. In Safari, this field editor appears to be unique
+    // to the location field, and the same instance is shared throughout the
+    // application. This lets us simply keep a reference to the menu item we
+    // add and check its presence to stop from adding the menu item multiple
+    // times.
+    if (self.editSearchProvidersItem) return;
+    self.editSearchProvidersItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Omnibar Search Providers…", @"location field context menu item")
+                                                               action:@selector(editSearchProviders:)
+                                                        keyEquivalent:@""] autorelease];
+    self.editSearchProvidersItem.target = self;
+    NSWindow *window = [locationField performSelector:@selector(window)];
+    NSResponder *locationFieldEditor = [window fieldEditor:YES forObject:locationField];
+    [locationFieldEditor.menu addItem:[NSMenuItem separatorItem]];
+    [locationFieldEditor.menu addItem:self.editSearchProvidersItem];
+}
+
 - (void)initBrowserWindow:(NSWindow *)window
 {
     NSWindowController *windowController = [window windowController];
@@ -111,10 +141,12 @@
     {
         [[windowController performSelector:@selector(searchField)] removeFromSuperview];
 
+        id locationField = [windowController performSelector:@selector(locationField)];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onLocationFieldChange:)
                                                      name:@"NSControlTextDidChangeNotification"
-                                                   object:[windowController performSelector:@selector(locationField)]];
+                                                   object:locationField];
+        [self addContextMenuItemsToLocationField:locationField];
     }
 }
 
@@ -124,15 +156,22 @@
     [self initBrowserWindow:window];
 }
 
-- (void)loadSearchProviders
+- (void)loadApplicationDefaults
 {
     NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:@"SearchProviders" ofType:@"plist"];
     NSDictionary *searchProvidersConf = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSArray *defaultSearchProviders = [searchProvidersConf objectForKey:@"SearchProvidersList"];
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObject:defaultSearchProviders
+                                                            forKey:kOmnibarSearchProviders];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+}
 
+- (void)loadSearchProviders
+{
     [searchProviders release]; searchProviders = nil;
     [defaultSearchProvider release]; defaultSearchProvider = nil;
 
-    searchProviders = [[searchProvidersConf objectForKey:@"SearchProvidersList"] retain];
+    searchProviders = [[[NSUserDefaults standardUserDefaults] arrayForKey:kOmnibarSearchProviders] retain];
 
     for (NSDictionary *searchProvider in searchProviders)
     {
@@ -142,6 +181,12 @@
             break;
         }
     }
+}
+
+- (void)saveSearchProviders:(NSArray *)someSearchProviders
+{
+    [[NSUserDefaults standardUserDefaults] setObject:someSearchProviders
+                                              forKey:kOmnibarSearchProviders];
 }
 
 - (NSDictionary *)searchProviderForKeyword:(NSString *)keyword
@@ -168,11 +213,36 @@
     [barProviderMap removeObjectForKey:[NSNumber numberWithInteger:locationField.hash]];
 }
 
+- (void)editSearchProviders:(id)sender
+{
+    NSMutableArray *mutableSearchProviders = [NSMutableArray array];
+    for (NSDictionary *provider in [SafariOmnibar sharedInstance].searchProviders)
+    {
+        [mutableSearchProviders addObject:[[provider mutableCopy] autorelease]];
+    }
+    SearchProvidersEditorWindowController *editor = [[SearchProvidersEditorWindowController alloc] initWithSearchProviders:mutableSearchProviders];
+    [[NSApplication sharedApplication] beginSheet:editor.window
+                                   modalForWindow:[[NSApplication sharedApplication] keyWindow]
+                                    modalDelegate:self
+                                   didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
+                                      contextInfo:editor];
+}
+
+- (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    SearchProvidersEditorWindowController *editor = contextInfo;
+    [self saveSearchProviders:editor.searchProviders];
+    [self loadSearchProviders];
+    [sheet orderOut:self];
+    [editor autorelease];
+}
+
 - (id)init
 {
     if ((self = [super init]))
     {
         barProviderMap = [[NSMutableDictionary alloc] init];
+        [self loadApplicationDefaults];
         [self loadSearchProviders];
 
         for (NSWindow *window in [[NSApplication sharedApplication] windows])
@@ -202,6 +272,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [editSearchProvidersItem release], editSearchProvidersItem = nil;
     [barProviderMap release], barProviderMap = nil;
     [defaultSearchProvider release], defaultSearchProvider = nil;
     [searchProviders release], searchProviders = nil;

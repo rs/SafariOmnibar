@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C8F02A713DB765600A3632D /* SearchProvidersEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8F02A613DB765600A3632D /* SearchProvidersEditorWindowController.m */; };
+		1C8F02AA13DB7B2C00A3632D /* SearchProvidersEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C8F02A913DB7B2C00A3632D /* SearchProvidersEditor.xib */; };
 		53B2999813CA4BD800CDB6FF /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B2999713CA4BD800CDB6FF /* JRSwizzle.m */; };
 		53B299A913CB306800CDB6FF /* SearchProviders.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53B299A813CB306800CDB6FF /* SearchProviders.plist */; };
 		53F7E26C13CA2680007FFA53 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F7E26B13CA2680007FFA53 /* Cocoa.framework */; };
@@ -15,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C8F02A513DB765600A3632D /* SearchProvidersEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchProvidersEditorWindowController.h; sourceTree = "<group>"; };
+		1C8F02A613DB765600A3632D /* SearchProvidersEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchProvidersEditorWindowController.m; sourceTree = "<group>"; };
+		1C8F02A913DB7B2C00A3632D /* SearchProvidersEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchProvidersEditor.xib; sourceTree = "<group>"; };
 		53B2999613CA4BD800CDB6FF /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		53B2999713CA4BD800CDB6FF /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		53B299A813CB306800CDB6FF /* SearchProviders.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SearchProviders.plist; sourceTree = "<group>"; };
@@ -70,6 +75,9 @@
 				53F7E27213CA2680007FFA53 /* Supporting Files */,
 				53F7E27D13CA26BC007FFA53 /* SafariOmnibar.h */,
 				53F7E27E13CA26BC007FFA53 /* SafariOmnibar.m */,
+				1C8F02A513DB765600A3632D /* SearchProvidersEditorWindowController.h */,
+				1C8F02A613DB765600A3632D /* SearchProvidersEditorWindowController.m */,
+				1C8F02A913DB7B2C00A3632D /* SearchProvidersEditor.xib */,
 				53B2999613CA4BD800CDB6FF /* JRSwizzle.h */,
 				53B2999713CA4BD800CDB6FF /* JRSwizzle.m */,
 			);
@@ -113,9 +121,6 @@
 /* Begin PBXProject section */
 		53F7E25F13CA2680007FFA53 /* Project object */ = {
 			isa = PBXProject;
-			attributes = {
-				ORGANIZATIONNAME = Dailymotion;
-			};
 			buildConfigurationList = 53F7E26213CA2680007FFA53 /* Build configuration list for PBXProject "SafariOmnibar" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -140,6 +145,7 @@
 			files = (
 				53F7E27613CA2680007FFA53 /* InfoPlist.strings in Resources */,
 				53B299A913CB306800CDB6FF /* SearchProviders.plist in Resources */,
+				1C8F02AA13DB7B2C00A3632D /* SearchProvidersEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +175,7 @@
 			files = (
 				53F7E27F13CA26BC007FFA53 /* SafariOmnibar.m in Sources */,
 				53B2999813CA4BD800CDB6FF /* JRSwizzle.m in Sources */,
+				1C8F02A713DB765600A3632D /* SearchProvidersEditorWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

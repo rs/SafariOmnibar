@@ -14,6 +14,7 @@
     NSMutableDictionary *barProviderMap;
 }
 
+@property (nonatomic, readonly) NSArray *searchProviders;
 @property (nonatomic, readonly) NSDictionary *defaultSearchProvider;
 @property (nonatomic, readonly) NSString *pluginVersion;
 

@@ -15,6 +15,7 @@
 }
 
 @property (nonatomic, readonly) NSDictionary *defaultSearchProvider;
+@property (nonatomic, readonly) NSString *pluginVersion;
 
 + (SafariOmnibar *)sharedInstance;
 - (NSDictionary *)searchProviderForKeyword:(NSString *)keyword;

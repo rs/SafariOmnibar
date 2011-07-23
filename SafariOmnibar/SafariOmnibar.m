@@ -60,6 +60,7 @@
 
 @implementation SafariOmnibar
 @synthesize defaultSearchProvider;
+@dynamic pluginVersion;
 
 - (void)onLocationFieldChange:(NSNotification *)notification
 {
@@ -206,6 +207,11 @@
     [super dealloc];
 }
 
++ (NSString *)pluginVersion
+{
+    return [[[NSBundle bundleForClass:self] infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
 + (SafariOmnibar *)sharedInstance
 {
     static SafariOmnibar *plugin = nil;
@@ -219,7 +225,7 @@
 + (void)load
 {
     [self sharedInstance];
-    NSLog(@"Safari Omnibar Loaded");
+    NSLog(@"Safari Omnibar %@ Loaded", self.pluginVersion);
 }
 
 @end

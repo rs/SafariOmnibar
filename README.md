@@ -12,7 +12,7 @@ Requirement
 Installation
 ============
 
-Download our [installer](https://github.com/downloads/rs/SafariOmnibar/Safari%20Omnibar-1.1.pkg) and run it then restart Safari.
+Download our [installer](https://github.com/downloads/rs/SafariOmnibar/Safari%20Omnibar-1.2.pkg) and run it then restart Safari.
 
 Uninstall
 =========

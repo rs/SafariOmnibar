@@ -36,7 +36,9 @@
         searchTerms = [location substringWithRange:NSMakeRange(colonLoc + 1, location.length - (colonLoc + 1))];
         [plugin resetSearchProviderForLocationField:locationField];
     }
-    else if ([location rangeOfString:@" "].location != NSNotFound || [location rangeOfString:@"."].location == NSNotFound)
+    else if ([location rangeOfString:@" "].location != NSNotFound // if more than one word, it's a search
+             // If single word, check if it's a domain or scheme://domain or domain:port
+             || ([location rangeOfString:@"."].location == NSNotFound && [location rangeOfString:@":"].location == NSNotFound))
     {
         // Default search provider
         searchURLTemplate = [[plugin defaultSearchProvider] objectForKey:@"SearchURLTemplate"];

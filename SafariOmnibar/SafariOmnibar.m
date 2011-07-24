@@ -24,7 +24,7 @@
 {
     SafariOmnibar *plugin = [SafariOmnibar sharedInstance];
     NSDictionary *provider = [plugin searchProviderForLocationField:locationField];
-    NSString *location = [locationField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *location = locationField.stringValue;
     NSString *searchTerms = location;
     NSString *searchURLTemplate = nil;
 
@@ -50,6 +50,7 @@
 
     if (searchURLTemplate)
     {
+        searchTerms = [searchTerms stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [locationField setStringValue:[searchURLTemplate stringByReplacingOccurrencesOfString:@"{searchTerms}" withString:searchTerms]];
     }
 

@@ -18,7 +18,7 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
 {
     SafariOmnibar *plugin = [SafariOmnibar sharedInstance];
     NSDictionary *provider = [plugin searchProviderForLocationField:locationField];
-    NSString *location = locationField.stringValue;
+    NSString *location = [locationField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *searchTerms = location;
     NSString *searchURLTemplate = nil;
 
@@ -27,24 +27,30 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
         // Custom search provider
         searchURLTemplate = [provider objectForKey:@"SearchURLTemplate"];
         NSUInteger colonLoc = [location rangeOfString:@":"].location;
-        searchTerms = [location substringWithRange:NSMakeRange(colonLoc + 1, location.length - (colonLoc + 1))];
+        searchTerms = [location substringWithRange:NSMakeRange(colonLoc + 2, location.length - (colonLoc + 2))];
         [plugin resetSearchProviderForLocationField:locationField];
-    }
-    else if ([location rangeOfString:@" "].location != NSNotFound // if more than one word, it's a search
-             // If single word, check if it's a domain or scheme://domain or domain:port
-             || ([location rangeOfString:@"."].location == NSNotFound && [location rangeOfString:@":"].location == NSNotFound))
-    {
-        // Default search provider
-        searchURLTemplate = [[plugin defaultSearchProvider] objectForKey:@"SearchURLTemplate"];
     }
     else
     {
-        // Not a search, URL?
+        NSURL *url = [NSURL URLWithString:location];
+        if (url && !url.scheme)
+        {
+            // User typed hostname/path without scheme, we automatically add default http scheme to ensure
+            // NSURL interprets the first part of the location as the host and not the path
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", location]];
+        }
+        if (!url || !url.host || ![NSHost hostWithName:url.host].address)
+        {
+            // When location can't be parsed as URL or URL's host part can't be resolved, perform a search using the default search provider
+            // Note: site:test.com is a valid NSURL but will fail the host test as "test.com" will be in the "path" field of NSURL.
+            //       This is a wanted behavoir as most search engines use keyword:<value> for special search engine behaviors.
+            searchURLTemplate = [[plugin defaultSearchProvider] objectForKey:@"SearchURLTemplate"];
+        }
     }
 
     if (searchURLTemplate)
     {
-        searchTerms = [searchTerms stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        searchTerms = searchTerms;
         [locationField setStringValue:[searchURLTemplate stringByReplacingOccurrencesOfString:@"{searchTerms}" withString:searchTerms]];
     }
 
@@ -255,7 +261,6 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
             [NSClassFromString(@"BrowserWindowController") jr_swizzleMethod:@selector(goToToolbarLocation:)
                                                                  withMethod:@selector(SafariOmnibar_goToToolbarLocation:) error:NULL];
         }
-
     }
     return self;
 }

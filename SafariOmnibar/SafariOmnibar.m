@@ -12,15 +12,6 @@
 
 NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
 
-@implementation NSObject(SO)
-
-- (void)SafariOmnibar_showPreferences:(NSMenuItem *)menuItem
-{
-    [self SafariOmnibar_showPreferences:menuItem];
-}
-
-@end
-
 @implementation NSWindowController(SO)
 
 - (void)SafariOmnibar_goToToolbarLocation:(NSTextField *)locationField

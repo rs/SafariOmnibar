@@ -33,17 +33,18 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
     else
     {
         NSURL *url = [NSURL URLWithString:location];
-        if (url && !url.scheme)
+        if (url)
         {
-            // User typed hostname/path without scheme, we automatically add default http scheme to ensure
-            // NSURL interprets the first part of the location as the host and not the path
-            url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", location]];
+            if (/* eg: host/path */ !url.scheme || /* eg: host:port or about:blank */ !url.host)
+            {
+                // User typed hostname/path or hostname:port without scheme, we automatically add default http scheme to ensure
+                // NSURL interprets the first part of the location as the host and not the path
+                url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", location]];
+            }
         }
-        if (!url || !url.host || ![NSHost hostWithName:url.host].address)
+        if (!url || ![NSHost hostWithName:url.host].address)
         {
             // When location can't be parsed as URL or URL's host part can't be resolved, perform a search using the default search provider
-            // Note: site:test.com is a valid NSURL but will fail the host test as "test.com" will be in the "path" field of NSURL.
-            //       This is a wanted behavoir as most search engines use keyword:<value> for special search engine behaviors.
             searchURLTemplate = [[plugin defaultSearchProvider] objectForKey:@"SearchURLTemplate"];
         }
     }

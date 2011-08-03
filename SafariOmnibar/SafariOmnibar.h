@@ -11,6 +11,7 @@
     @private
     NSArray *searchProviders;
     NSDictionary *defaultSearchProvider;
+    NSMenuItem *editSearchProvidersItem;
     NSMutableDictionary *barProviderMap;
 }
 

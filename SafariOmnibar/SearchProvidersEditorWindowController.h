@@ -10,6 +10,8 @@
 @interface SearchProvidersEditorWindowController : NSWindowController
 {
     NSMutableArray *searchProviders;
+    NSArrayController *arrayController;
+    NSTableView *tableView;
 }
 
 @property (nonatomic, readonly, copy) NSMutableArray *searchProviders;

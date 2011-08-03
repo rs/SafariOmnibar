@@ -3,6 +3,8 @@ What is this?
 
 Safari Omnibar is a Safari SIMBL plugin aiming at mimicing the Chrome's smart location bar which combines location and search.
 
+[Changelog](http://rsparkle.herokuapp.com/SafariOmnibar/changes.html)
+
 Requirement
 ===========
 
@@ -12,7 +14,7 @@ Requirement
 Installation
 ============
 
-Download our [installer](https://github.com/downloads/rs/SafariOmnibar/Safari%20Omnibar-1.2.pkg) and run it then restart Safari.
+Download our [installer](https://github.com/downloads/rs/SafariOmnibar/Safari%20Omnibar-1.3.pkg) and run it then restart Safari.
 
 Uninstall
 =========

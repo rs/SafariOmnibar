@@ -41,5 +41,9 @@
 			<string>org.webkit.nightly.WebKit</string>
 		</dict>
 	</array>
+	<key>SUFeedURL</key>
+	<string>https://rsparkle.herokuapp.com/SafariOmnibar/updates.xml</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 </dict>
 </plist>

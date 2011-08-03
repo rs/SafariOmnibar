@@ -7,6 +7,7 @@
 //
 
 #import "SafariOmnibar.h"
+#import "SparkleHelper.h"
 #import "SearchProvidersEditorWindowController.h"
 #import "JRSwizzle.h"
 
@@ -262,6 +263,8 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
             [NSClassFromString(@"BrowserWindowController") jr_swizzleMethod:@selector(goToToolbarLocation:)
                                                                  withMethod:@selector(SafariOmnibar_goToToolbarLocation:) error:NULL];
         }
+
+        [SparkleHelper initUpdater];
     }
     return self;
 }

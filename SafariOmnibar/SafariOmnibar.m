@@ -34,7 +34,7 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
     else
     {
         NSURL *url = [NSURL URLWithString:location];
-        if (url)
+        if (url && /* eg: file:/// */ !url.isFileURL)
         {
             if (/* eg: host/path */ !url.scheme || /* eg: host:port or about:blank */ !url.host)
             {

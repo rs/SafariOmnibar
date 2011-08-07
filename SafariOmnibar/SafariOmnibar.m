@@ -13,6 +13,38 @@
 
 NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
 
+static BOOL is_search_query(NSString *string)
+{
+    // If it starts by a known scheme, don't try to validate the URL format, user certainly want to enter a URL.
+    // Even a bad one should shouldn't be treated as a search
+    if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"] || [string hasPrefix:@"file://"])
+        return NO;
+
+    // If more than one word, it's certainly a search query
+    if ([string rangeOfString:@" "].location != NSNotFound)
+        return YES;
+
+    // Allow about:*, all other keyword:something should be treated as search query: think about site:mysite.com, define:word...
+    if ([string hasPrefix:@"about:"])
+        return NO;
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", string]];
+
+    // A single word that can't be parsed as an URL is certainly a search query
+    if (!url)
+        return YES;
+
+    // Treat localhost specifically
+    if ([url.host isEqualToString:@"localhost"])
+        return NO;
+
+    // If the host part contains dot(s), treat the string as URL, the user certainly entered a URL manually with no scheme
+    if ([url.host rangeOfString:@"."].location != NSNotFound)
+        return NO;
+
+    return YES;
+}
+
 @implementation NSWindowController(SO)
 
 - (void)SafariOmnibar_goToToolbarLocation:(NSTextField *)locationField
@@ -31,23 +63,10 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
         searchTerms = [location substringWithRange:NSMakeRange(colonLoc + 2, location.length - (colonLoc + 2))];
         [plugin resetSearchProviderForLocationField:locationField];
     }
-    else
+    else if (is_search_query(location))
     {
-        NSURL *url = [NSURL URLWithString:location];
-        if (url && /* eg: file:/// */ !url.isFileURL)
-        {
-            if (/* eg: host/path */ !url.scheme || /* eg: host:port or about:blank */ !url.host)
-            {
-                // User typed hostname/path or hostname:port without scheme, we automatically add default http scheme to ensure
-                // NSURL interprets the first part of the location as the host and not the path
-                url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", location]];
-            }
-        }
-        if (!url || (![url.host isEqualToString:@"about"] && ![NSHost hostWithName:url.host].address))
-        {
-            // When location can't be parsed as URL or URL's host part can't be resolved, perform a search using the default search provider
-            searchURLTemplate = [[plugin defaultSearchProvider] objectForKey:@"SearchURLTemplate"];
-        }
+        // If we detect a search query with not search provider keyword, use the default search provider
+        searchURLTemplate = [[plugin defaultSearchProvider] objectForKey:@"SearchURLTemplate"];
     }
 
     if (searchURLTemplate)

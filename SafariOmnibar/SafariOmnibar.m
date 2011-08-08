@@ -116,18 +116,39 @@ static BOOL is_search_query(NSString *string)
     }
     else
     {
-        NSUInteger firstSpaceLoc = [location rangeOfString:@" "].location;
-        if (firstSpaceLoc != NSNotFound && firstSpaceLoc > 0)
+        NSDictionary *provider = nil;
+        NSString *terms = nil;
+
+        if ([location hasPrefix:@"?"])
         {
-            // Lookup for search provider keyword
-            NSString *firstWord = [[location substringWithRange:NSMakeRange(0, firstSpaceLoc)] lowercaseString];
-            NSDictionary *provider = [[SafariOmnibar sharedInstance] searchProviderForKeyword:firstWord];
-            if (provider)
+            // Force default search provider if location starts with "?"
+            terms = [location substringFromIndex:1];
+            provider = [[SafariOmnibar sharedInstance] defaultSearchProvider];
+        }
+        else
+        {
+            // Keyword custom search provider
+            NSUInteger firstSpaceLoc = [location rangeOfString:@" "].location;
+
+            if (firstSpaceLoc != NSNotFound && firstSpaceLoc > 0)
             {
-                NSString *terms = [location substringWithRange:NSMakeRange(firstSpaceLoc + 1, location.length - (firstSpaceLoc + 1))];
-                locationField.stringValue = [NSString stringWithFormat:@"%@: %@", [provider objectForKey:@"Name"], terms];
-                [barProviderMap setObject:provider forKey:[NSNumber numberWithInteger:locationField.hash]];
+                // Lookup for search provider keyword
+                NSString *firstWord = [[location substringWithRange:NSMakeRange(0, firstSpaceLoc)] lowercaseString];
+                provider = [[SafariOmnibar sharedInstance] searchProviderForKeyword:firstWord];
+                if (provider)
+                {
+                    // Remove the keyword from terms
+                    terms = [location substringFromIndex:firstSpaceLoc + 1];
+                }
             }
+        }
+
+        if (provider)
+        {
+            // Add the provider name
+            locationField.stringValue = [NSString stringWithFormat:@"%@: %@", [provider objectForKey:@"Name"], terms];
+            // Save current provider for this field
+            [barProviderMap setObject:provider forKey:[NSNumber numberWithInteger:locationField.hash]];
         }
     }
 }

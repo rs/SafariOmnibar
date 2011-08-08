@@ -34,6 +34,16 @@
 			<key>SearchURLTemplate</key>
 			<string>http://en.wikipedia.org/w/index.php?title=Special:Search&amp;search={searchTerms}</string>
 		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Dailymotion</string>
+			<key>Keyword</key>
+			<string>video</string>
+			<key>Default</key>
+			<false/>
+			<key>SearchURLTemplate</key>
+			<string>http://www.dailymotion.com?search={searchTerms}</string>
+		</dict>
 	</array>
 </dict>
 </plist>

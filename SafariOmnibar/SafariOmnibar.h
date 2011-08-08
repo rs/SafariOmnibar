@@ -23,5 +23,6 @@
 - (NSDictionary *)searchProviderForKeyword:(NSString *)keyword;
 - (NSDictionary *)searchProviderForLocationField:(NSTextField *)locationField;
 - (void)resetSearchProviderForLocationField:(NSTextField *)locationField;
+- (void)updateSearchProviderForLocationField:(NSTextField *)locationField;
 
 @end

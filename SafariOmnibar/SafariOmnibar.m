@@ -87,6 +87,59 @@ static BOOL is_search_query(NSString *string)
 
 @end
 
+@implementation NSDocument(SO)
+
+- (NSTextField *)SafariOmnibar_locationField
+{
+    id windowController = nil;
+    if ([self respondsToSelector:@selector(browserWindowControllerMac)]) // Safari 5.1
+    {
+        windowController = [self performSelector:@selector(browserWindowControllerMac)];
+    }
+    else if ([self respondsToSelector:@selector(browserWindowController)]) // Safari 5.0
+    {
+        windowController = [self performSelector:@selector(browserWindowController)];
+    }
+    if (windowController)
+    {
+        if ([windowController respondsToSelector:@selector(locationField)])
+        {
+            return [windowController performSelector:@selector(locationField)];
+        }
+    }
+    return nil;
+}
+
+- (void)SafariOmnibar_searchWeb:(id)sender
+{
+    // This is the action behind Edit > Find > Find Google...
+    NSTextField *locationField = [self SafariOmnibar_locationField];
+    if (locationField)
+    {
+        // Force default search provider
+        [locationField setStringValue:@"?"];
+        [[SafariOmnibar sharedInstance] updateSearchProviderForLocationField:locationField];
+        // Focus location field
+        [locationField becomeFirstResponder];
+        // Move the caret at the end of the text's field
+        [(NSText *)[[locationField window] firstResponder] setSelectedRange:NSMakeRange(locationField.stringValue.length, 0)];
+    }
+}
+
+- (void)SafariOmnibar_openLocation:(id)sender
+{
+    // This is the action behind File > Open Location...
+    NSTextField *locationField = [self SafariOmnibar_locationField];
+    if (locationField)
+    {
+        // Mimic Chrome behavior by selecting the content of the location text field, ready to be replaced
+        [locationField selectText:nil];
+    }
+    [self SafariOmnibar_openLocation:sender];
+}
+
+@end
+
 @interface SafariOmnibar ()
 
 @property (nonatomic, retain) NSMenuItem *editSearchProvidersItem;
@@ -101,63 +154,7 @@ static BOOL is_search_query(NSString *string)
 
 - (void)onLocationFieldChange:(NSNotification *)notification
 {
-    NSTextField *locationField = notification.object;
-    NSString *location = locationField.stringValue;
-    NSDictionary *provider = [self searchProviderForLocationField:locationField];
-
-    if (provider)
-    {
-        NSString *providerName = [provider objectForKey:@"Name"];
-        if (![location hasPrefix:[NSString stringWithFormat:@"%@: ", providerName]])
-        {
-            [self resetSearchProviderForLocationField:locationField];
-            NSUInteger colonLoc = [location rangeOfString:@":"].location;
-            if (colonLoc != NSNotFound)
-            {
-                location = [NSString stringWithFormat:@"%@%@",
-                            [provider objectForKey:@"Keyword"],
-                            [location substringWithRange:NSMakeRange(colonLoc + 1, location.length - (colonLoc + 1))]];
-                [locationField setStringValue:location];
-            }
-        }
-    }
-    else
-    {
-        NSDictionary *provider = nil;
-        NSString *terms = nil;
-
-        if ([location hasPrefix:@"?"])
-        {
-            // Force default search provider if location starts with "?"
-            terms = [location substringFromIndex:1];
-            provider = [[SafariOmnibar sharedInstance] defaultSearchProvider];
-        }
-        else
-        {
-            // Keyword custom search provider
-            NSUInteger firstSpaceLoc = [location rangeOfString:@" "].location;
-
-            if (firstSpaceLoc != NSNotFound && firstSpaceLoc > 0)
-            {
-                // Lookup for search provider keyword
-                NSString *firstWord = [[location substringWithRange:NSMakeRange(0, firstSpaceLoc)] lowercaseString];
-                provider = [[SafariOmnibar sharedInstance] searchProviderForKeyword:firstWord];
-                if (provider)
-                {
-                    // Remove the keyword from terms
-                    terms = [location substringFromIndex:firstSpaceLoc + 1];
-                }
-            }
-        }
-
-        if (provider)
-        {
-            // Add the provider name
-            locationField.stringValue = [NSString stringWithFormat:@"%@: %@", [provider objectForKey:@"Name"], terms];
-            // Save current provider for this field
-            [barProviderMap setObject:provider forKey:[NSNumber numberWithInteger:locationField.hash]];
-        }
-    }
+    [self updateSearchProviderForLocationField:notification.object];
 }
 
 - (void)addContextMenuItemsToLocationField:(id)locationField
@@ -249,6 +246,66 @@ static BOOL is_search_query(NSString *string)
     return nil;
 }
 
+- (void)updateSearchProviderForLocationField:(NSTextField *)locationField
+{
+    NSString *location = locationField.stringValue;
+    NSDictionary *provider = [self searchProviderForLocationField:locationField];
+
+    if (provider)
+    {
+        NSString *providerName = [provider objectForKey:@"Name"];
+        if (![location hasPrefix:[NSString stringWithFormat:@"%@: ", providerName]])
+        {
+            [self resetSearchProviderForLocationField:locationField];
+            NSUInteger colonLoc = [location rangeOfString:@":"].location;
+            if (colonLoc != NSNotFound)
+            {
+                location = [NSString stringWithFormat:@"%@%@",
+                            [provider objectForKey:@"Keyword"],
+                            [location substringWithRange:NSMakeRange(colonLoc + 1, location.length - (colonLoc + 1))]];
+                [locationField setStringValue:location];
+            }
+        }
+    }
+    else
+    {
+        NSDictionary *provider = nil;
+        NSString *terms = nil;
+
+        if ([location hasPrefix:@"?"])
+        {
+            // Force default search provider if location starts with "?"
+            terms = [location substringFromIndex:1];
+            provider = [[SafariOmnibar sharedInstance] defaultSearchProvider];
+        }
+        else
+        {
+            // Keyword custom search provider
+            NSUInteger firstSpaceLoc = [location rangeOfString:@" "].location;
+
+            if (firstSpaceLoc != NSNotFound && firstSpaceLoc > 0)
+            {
+                // Lookup for search provider keyword
+                NSString *firstWord = [[location substringWithRange:NSMakeRange(0, firstSpaceLoc)] lowercaseString];
+                provider = [[SafariOmnibar sharedInstance] searchProviderForKeyword:firstWord];
+                if (provider)
+                {
+                    // Remove the keyword from terms
+                    terms = [location substringFromIndex:firstSpaceLoc + 1];
+                }
+            }
+        }
+
+        if (provider)
+        {
+            // Add the provider name
+            locationField.stringValue = [NSString stringWithFormat:@"%@: %@", [provider objectForKey:@"Name"], terms];
+            // Save current provider for this field
+            [barProviderMap setObject:provider forKey:[NSNumber numberWithInteger:locationField.hash]];
+        }
+    }
+}
+
 - (NSDictionary *)searchProviderForLocationField:(NSTextField *)locationField
 {
     return [barProviderMap objectForKey:[NSNumber numberWithInteger:locationField.hash]];
@@ -310,6 +367,12 @@ static BOOL is_search_query(NSString *string)
             [NSClassFromString(@"BrowserWindowController") jr_swizzleMethod:@selector(goToToolbarLocation:)
                                                                  withMethod:@selector(SafariOmnibar_goToToolbarLocation:) error:NULL];
         }
+
+        [NSClassFromString(@"BrowserDocument") jr_swizzleMethod:@selector(searchWeb:)
+                                                     withMethod:@selector(SafariOmnibar_searchWeb:) error:NULL];
+        [NSClassFromString(@"BrowserDocument") jr_swizzleMethod:@selector(openLocation:)
+                                                     withMethod:@selector(SafariOmnibar_openLocation:) error:NULL];
+
 
         [SparkleHelper initUpdater];
     }

@@ -60,7 +60,14 @@ static BOOL is_search_query(NSString *string)
         // Custom search provider
         searchURLTemplate = [provider objectForKey:@"SearchURLTemplate"];
         NSUInteger colonLoc = [location rangeOfString:@":"].location;
-        searchTerms = [location substringWithRange:NSMakeRange(colonLoc + 2, location.length - (colonLoc + 2))];
+        if (colonLoc + 2 < location.length)
+        {
+            searchTerms = [location substringWithRange:NSMakeRange(colonLoc + 2, location.length - (colonLoc + 2))];
+        }
+        else
+        {
+            searchTerms = @"";
+        }
         [plugin resetSearchProviderForLocationField:locationField];
     }
     else if (is_search_query(location))

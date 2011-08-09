@@ -17,7 +17,7 @@ static BOOL is_search_query(NSString *string)
 {
     // If it starts by a known scheme, don't try to validate the URL format, user certainly want to enter a URL.
     // Even a bad one should shouldn't be treated as a search
-    if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"] || [string hasPrefix:@"file://"])
+    if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"] || [string hasPrefix:@"file://"] || [string hasPrefix:@"javascript:"])
         return NO;
 
     // If more than one word, it's certainly a search query

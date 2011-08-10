@@ -14,7 +14,7 @@ Requirement
 Installation
 ============
 
-Download our [installer](https://github.com/downloads/rs/SafariOmnibar/Safari%20Omnibar-1.3.pkg) and run it then restart Safari.
+Download our [installer](http://rsparkle.herokuapp.com/SafariOmnibar/last) and run it then restart Safari.
 
 Uninstall
 =========

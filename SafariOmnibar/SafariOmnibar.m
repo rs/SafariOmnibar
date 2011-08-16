@@ -15,18 +15,18 @@ NSString * const kOmnibarSearchProviders = @"SafariOmnibar_SearchProviders";
 
 static BOOL is_search_query(NSString *string)
 {
+    // Clean the input
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
     // If it starts by a known scheme, don't try to validate the URL format, user certainly want to enter a URL.
     // Even a bad one should shouldn't be treated as a search
-    if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"] || [string hasPrefix:@"file://"] || [string hasPrefix:@"javascript:"])
+    if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"] || [string hasPrefix:@"file://"]
+        || [string hasPrefix:@"javascript:"] || [string hasPrefix:@"feed:"] || [string hasPrefix:@"about:"])
         return NO;
 
     // If more than one word, it's certainly a search query
     if ([string rangeOfString:@" "].location != NSNotFound)
         return YES;
-
-    // Allow about:*, all other keyword:something should be treated as search query: think about site:mysite.com, define:word...
-    if ([string hasPrefix:@"about:"])
-        return NO;
 
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", string]];
 

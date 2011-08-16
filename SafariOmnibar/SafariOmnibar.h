@@ -12,7 +12,7 @@
     NSArray *searchProviders;
     NSDictionary *defaultSearchProvider;
     NSMenuItem *editSearchProvidersItem;
-    NSMutableDictionary *barProviderMap;
+    NSMutableDictionary *locationFieldContext;
 }
 
 @property (nonatomic, readonly) NSArray *searchProviders;
@@ -24,5 +24,8 @@
 - (NSDictionary *)searchProviderForLocationField:(NSTextField *)locationField;
 - (void)resetSearchProviderForLocationField:(NSTextField *)locationField;
 - (void)updateSearchProviderForLocationField:(NSTextField *)locationField;
+- (NSDictionary *)previousSearchProviderForLocationField:(NSTextField *)locationField;
+- (void)saveSearchQuery:(NSString *)searchQuery forLocationField:(NSTextField *)locationField;
+- (NSString *)previousSearchQueryForLocationField:(NSTextField *)locationField;
 
 @end

@@ -79,6 +79,7 @@ static BOOL is_search_query(NSString *string)
     if (searchURLTemplate)
     {
         searchTerms = [searchTerms stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+        searchTerms = [searchTerms stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [locationField setStringValue:[searchURLTemplate stringByReplacingOccurrencesOfString:@"{searchTerms}" withString:searchTerms]];
         [plugin saveSearchQuery:searchTerms forLocationField:locationField];
     }

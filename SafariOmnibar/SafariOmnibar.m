@@ -130,11 +130,11 @@ static BOOL is_search_query(NSString *string)
         {
             // Add back the former search provider keyword
             lastSearch = [NSString stringWithFormat:@"%@ %@", [provider objectForKey:@"Keyword"], lastSearch];
-            [plugin updateSearchProviderForLocationField:locationField];
         }
         if (lastSearch)
         {
             [locationField setStringValue:lastSearch];
+            if (provider) [plugin updateSearchProviderForLocationField:locationField];
             return YES;
         }
     }

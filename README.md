@@ -9,7 +9,7 @@ Requirement
 ===========
 
 - Safari 5.0 (Snow Leopard) or 5.1 (Lion)
-- [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) 1.9.9 (packaged with the installer)
+- [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) 0.9.9 (packaged with the installer)
 
 Installation
 ============

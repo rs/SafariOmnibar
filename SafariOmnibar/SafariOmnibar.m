@@ -21,9 +21,11 @@ static BOOL is_search_query(NSString *string)
     // If it starts by a known scheme, don't try to validate the URL format, user certainly want to enter a URL.
     // Even a bad one should shouldn't be treated as a search
     if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"] || [string hasPrefix:@"file://"]
-        || [string hasPrefix:@"javascript:"] || [string hasPrefix:@"feed:"] || [string hasPrefix:@"about:"]
-        || [string hasPrefix:@"man:"]) // Fix conflict with http://www.bruji.com/bwana/
-        // TODO: find a way to dynamically detect all scheme handled by Safari
+        || [string hasPrefix:@"javascript:"] || [string hasPrefix:@"feed:"] || [string hasPrefix:@"about:"])
+        return NO;
+
+    // If it starts by a scheme handled by another app, let the target app validate the URL and do not catch it as a search
+    if (LSGetApplicationForURL((CFURLRef)[NSURL URLWithString:string], kLSRolesAll, NULL, NULL) == 0)
         return NO;
 
     // If more than one word, it's certainly a search query

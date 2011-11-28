@@ -169,7 +169,7 @@ static BOOL is_search_query(NSString *string)
 {
     // This is the action behind File > Open Location...
     NSTextField *locationField = [self SafariOmnibar_locationField];
-    if (locationField && ![self SafariOmnibar_restoreLastSearch:locationField forced:NO])
+    if (locationField)
     {
         // Mimic Chrome behavior by selecting the content of the location text field, ready to be replaced
         [locationField selectText:nil];

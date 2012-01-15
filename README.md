@@ -8,6 +8,7 @@ Safari Omnibar is a Safari SIMBL plugin aiming at mimicing the Chrome's smart lo
 Requirement
 ===========
 
+- Intel Mac ([PPC port](https://github.com/stefanschmidt/SafariOmnibar))
 - Safari 5.0 (Snow Leopard) or 5.1 (Lion)
 - [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) 0.9.9 (packaged with the installer)
 
@@ -16,15 +17,15 @@ Installation
 
 Download our [installer](http://rsparkle.herokuapp.com/SafariOmnibar/last) and run it then restart Safari.
 
-Uninstall
-=========
+Uninstallation
+==============
 
 Remove the file `/Library/Application\ Support/SIMBL/Plugins/SafariOmnibar.bundle`
 
 Usage
 =====
 
-Just type our search in the location bar and it will perform a Google search.
+Just type a search query in the location bar and it will perform a Google search.
 
 TODO
 ====

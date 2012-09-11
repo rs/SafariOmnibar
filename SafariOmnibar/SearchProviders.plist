@@ -26,6 +26,16 @@
 		</dict>
 		<dict>
 			<key>Name</key>
+			<string>DuckDuckGo</string>
+			<key>Keyword</key>
+			<string>ddg</string>
+			<key>Default</key>
+			<false/>
+			<key>SearchURLTemplate</key>
+			<string>https://duckduckgo.com/?q={searchTerms}&amp;t=safariomnibar</string>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>Wikipedia</string>
 			<key>Keyword</key>
 			<string>w</string>
